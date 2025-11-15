@@ -1332,17 +1332,17 @@ static void dmc_load_work_fn(struct work_struct *work)
 	}
 
 	if (err) {
-		drm_notice(display->drm,
+		drm_warn(display->drm,
 			   "Failed to load DMC firmware %s (%pe). Disabling runtime power management.\n",
 			   dmc->fw_path, ERR_PTR(err));
-		drm_notice(display->drm, "DMC firmware homepage: %s",
+		drm_warn(display->drm, "DMC firmware homepage: %s",
 			   INTEL_DMC_FIRMWARE_URL);
 		return;
 	}
 
 	err = parse_dmc_fw(dmc, fw);
 	if (err) {
-		drm_notice(display->drm,
+		drm_warn(display->drm,
 			   "Failed to parse DMC firmware %s (%pe). Disabling runtime power management.\n",
 			   dmc->fw_path, ERR_PTR(err));
 		goto out;
