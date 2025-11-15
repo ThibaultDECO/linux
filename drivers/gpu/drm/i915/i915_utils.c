@@ -13,7 +13,7 @@
 
 void add_taint_for_CI(struct drm_i915_private *i915, unsigned int taint)
 {
-	drm_notice(&i915->drm, "CI tainted: %#x by %pS\n",
+	drm_warn(&i915->drm, "CI tainted: %#x by %pS\n",
 		   taint, __builtin_return_address(0));
 
 	/* Failures that occur during fault injection testing are expected */
