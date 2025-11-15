@@ -324,10 +324,10 @@ int intel_engine_set_heartbeat(struct intel_engine_cs *engine,
 	if (delay != engine->defaults.heartbeat_interval_ms &&
 	    delay < 2 * engine->props.preempt_timeout_ms) {
 		if (intel_engine_uses_guc(engine))
-			drm_notice(&engine->i915->drm, "%s heartbeat interval adjusted to a non-default value which may downgrade individual engine resets to full GPU resets!\n",
+			drm_warn(&engine->i915->drm, "%s heartbeat interval adjusted to a non-default value which may downgrade individual engine resets to full GPU resets!\n",
 				   engine->name);
 		else
-			drm_notice(&engine->i915->drm, "%s heartbeat interval adjusted to a non-default value which may cause engine resets to target innocent contexts!\n",
+			drm_warn(&engine->i915->drm, "%s heartbeat interval adjusted to a non-default value which may cause engine resets to target innocent contexts!\n",
 				   engine->name);
 	}
 
