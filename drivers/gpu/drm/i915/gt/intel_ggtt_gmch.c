@@ -101,7 +101,7 @@ int intel_ggtt_gmch_probe(struct i915_ggtt *ggtt)
 	ggtt->vm.alloc_scratch_dma = alloc_pt_dma;
 
 	if (needs_idle_maps(i915)) {
-		drm_notice(&i915->drm,
+		drm_warn(&i915->drm,
 			   "Flushing DMA requests before IOMMU unmaps; performance may be degraded\n");
 		ggtt->do_idle_maps = true;
 	}
