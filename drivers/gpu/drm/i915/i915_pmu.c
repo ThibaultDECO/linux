@@ -1208,7 +1208,7 @@ err_name:
 	if (IS_DGFX(i915))
 		kfree(pmu->name);
 err:
-	drm_notice(&i915->drm, "Failed to register PMU!\n");
+	drm_warn(&i915->drm, "Failed to register PMU!\n");
 }
 
 void i915_pmu_unregister(struct drm_i915_private *i915)
