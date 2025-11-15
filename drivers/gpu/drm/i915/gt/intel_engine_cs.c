@@ -532,7 +532,7 @@ static int intel_engine_setup(struct intel_gt *gt, enum intel_engine_id id,
 	do { \
 		u64 clamp = intel_clamp_##field(engine, engine->props.field); \
 		if (clamp != engine->props.field) { \
-			drm_notice(&engine->i915->drm, \
+			drm_warn(&engine->i915->drm, \
 				   "Warning, clamping %s to %lld to prevent overflow\n", \
 				   #field, clamp); \
 			engine->props.field = clamp; \
