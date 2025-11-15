@@ -168,11 +168,11 @@ static int __wopcm_init_regs(struct xe_device *xe, struct xe_gt *gt,
 	return 0;
 
 err_out:
-	drm_notice(&xe->drm, "Failed to init uC WOPCM registers!\n");
-	drm_notice(&xe->drm, "%s(%#x)=%#x\n", "DMA_GUC_WOPCM_OFFSET",
+	drm_warn(&xe->drm, "Failed to init uC WOPCM registers!\n");
+	drm_warn(&xe->drm, "%s(%#x)=%#x\n", "DMA_GUC_WOPCM_OFFSET",
 		   DMA_GUC_WOPCM_OFFSET.addr,
 		   xe_mmio_read32(&gt->mmio, DMA_GUC_WOPCM_OFFSET));
-	drm_notice(&xe->drm, "%s(%#x)=%#x\n", "GUC_WOPCM_SIZE",
+	drm_warn(&xe->drm, "%s(%#x)=%#x\n", "GUC_WOPCM_SIZE",
 		   GUC_WOPCM_SIZE.addr,
 		   xe_mmio_read32(&gt->mmio, GUC_WOPCM_SIZE));
 
@@ -261,7 +261,7 @@ check:
 		XE_WARN_ON(!wopcm->guc.base);
 		XE_WARN_ON(!wopcm->guc.size);
 	} else {
-		drm_notice(&xe->drm, "Unsuccessful WOPCM partitioning\n");
+		drm_warn(&xe->drm, "Unsuccessful WOPCM partitioning\n");
 		return -E2BIG;
 	}
 
