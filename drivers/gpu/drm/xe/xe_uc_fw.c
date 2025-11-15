@@ -371,7 +371,7 @@ int xe_uc_fw_check_version_requirements(struct xe_uc_fw *uc_fw)
 	    (uc_fw->full_ver_required &&
 	     ((wanted->minor != found->minor) ||
 	      (wanted->patch != found->patch)))) {
-		drm_notice(&xe->drm, "%s firmware %s: unexpected version: %u.%u.%u != %u.%u.%u\n",
+		drm_warn(&xe->drm, "%s firmware %s: unexpected version: %u.%u.%u != %u.%u.%u\n",
 			   xe_uc_fw_type_repr(uc_fw->type), uc_fw->path,
 			   found->major, found->minor, found->patch,
 			   wanted->major, wanted->minor, wanted->patch);
@@ -380,7 +380,7 @@ int xe_uc_fw_check_version_requirements(struct xe_uc_fw *uc_fw)
 
 	if (wanted->minor > found->minor ||
 	    (wanted->minor == found->minor && wanted->patch > found->patch)) {
-		drm_notice(&xe->drm, "%s firmware (%u.%u.%u) is recommended, but only (%u.%u.%u) was found in %s\n",
+		drm_warn(&xe->drm, "%s firmware (%u.%u.%u) is recommended, but only (%u.%u.%u) was found in %s\n",
 			   xe_uc_fw_type_repr(uc_fw->type),
 			   wanted->major, wanted->minor, wanted->patch,
 			   found->major, found->minor, found->patch,
@@ -792,7 +792,7 @@ static int uc_fw_copy(struct xe_uc_fw *uc_fw, const void *data, size_t size, u32
 
 	obj = xe_managed_bo_create_from_data(xe, tile, data, size, flags);
 	if (IS_ERR(obj)) {
-		drm_notice(&xe->drm, "%s firmware %s: failed to create / populate bo",
+		drm_warn(&xe->drm, "%s firmware %s: failed to create / populate bo",
 			   xe_uc_fw_type_repr(uc_fw->type), uc_fw->path);
 		err = PTR_ERR(obj);
 		goto fail;
@@ -811,7 +811,7 @@ static int uc_fw_copy(struct xe_uc_fw *uc_fw, const void *data, size_t size, u32
 
 fail:
 	xe_uc_fw_change_status(uc_fw, XE_UC_FIRMWARE_ERROR);
-	drm_notice(&xe->drm, "%s firmware %s: copy failed with error %d\n",
+	drm_warn(&xe->drm, "%s firmware %s: copy failed with error %d\n",
 		   xe_uc_fw_type_repr(uc_fw->type), uc_fw->path, err);
 
 	return err;
