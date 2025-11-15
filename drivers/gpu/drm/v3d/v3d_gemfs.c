@@ -49,7 +49,7 @@ void v3d_gemfs_init(struct v3d_dev *v3d)
 
 err:
 	v3d->gemfs = NULL;
-	drm_notice(&v3d->drm,
+	drm_warn(&v3d->drm,
 		   "Transparent Hugepage support is recommended for optimal performance on this platform!\n");
 }
 
